@@ -1,12 +1,6 @@
 {% extends 'base.html' %}
 {% import 'macros.html' as macro %}
 
-<!-- Styles block -->
-{% block styles%}
-    {{ super() }}
-    <link rel="stylesheet" href="{{url_for('static',filename='css/writer.css')}}">
-    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
-{% endblock %}
 
 <!-- Content block -->
 {% block content %}
@@ -15,24 +9,46 @@
 
     <div class="container">
 
+        <h2> 
+            {{ post.post_title }}
+            <br>
+            <small>
+                by {{ post.user.username }}
+            </small> 
+        </h2>
+
+        <p>
+            {{ format_post | safe }}
+        </p>
+
+        <hr>
+
         <div class="row">
 
-            <div class="col-xs-6 col-md-4 col-lg-4">
+            <div class="col-md4 col-lg-4">
 
-                <h3 class="writer-header">List of Posts</h3>
+                <h3>
+
+                    <a href="/writer/post/update/{{post.id}}">
+                        Update Post
+                    </a>
+
+                </h3>
+
+            </div>
+
+            <div class="col-md4 col-lg-4">
                 
             </div>
 
-            <div class="col-md-4 col-lg-4">
-                
-            </div>
+            <div class="col-md4 col-lg-4">
 
-            <div class="col-xs-6 col-md-4 col-lg-4">
+                <h3>
 
-                <h3 class="post-create">
+                    <a href="/writer/post/delete/{{post.id}}">
+                        Delete Post
+                    </a>
 
-                    <a href="/writer/post/new"> Create Post</a>
-                    
                 </h3>
                 
             </div>
@@ -41,8 +57,29 @@
 
         <hr>
 
+        <div class="row">
+
+            <div class="col-md-4 col-lg-4">
+
+                <h3>Comments</h3>
+
+            </div>
+
+            <div class="col-md-4 col-lg-4">
+                
+            </div>
+
+            <div class="col-md-4 col-lg-">
+                
+
+            </div>
+
+        </div>
+
+        <hr>
+        
         <ul class="list-unstyled">
-            {{ macro.displayPostListWriter(posts)}}
+            {{ macro.displayCommentListWriter(comments) }}
         </ul>
 
 
