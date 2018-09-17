@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+<!-- Styles block -->
+{% block styles%}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/post.css')}}">
+    <link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+{% endblock %}
+
+
+<!-- Content block -->
+{% block content %}
+
+    <title> {{ title }} </title>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-2 col-md-2 col-lg-2">
+
+                <a href="/">
+
+                    <i class="glyphicon glyphicon-menu-left back-icon"></i>
+
+                </a>
+            
+            </div>
+
+            <div class="col-sm-10 col-md-10 col-lg-10">
+
+                <h2 class="post-title"> 
+                    {{ post.post_title }}
+                    <br>
+                    <small class="writer">
+                        by {{ post.user.username }}
+                    </small> 
+                </h2>
+
+                <p class="post-content">
+                    {{ format_post | safe }}
+                </p>
+                
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+
+                <h3 class="comment-header">Comments</h3>
+
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                
+            </div>
+
+            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-">
+                
+                <h3 class="comment-create">
+                    <a href="/post/comment/new/{{post.id}}">
+                        Add Comment
+                    </a>
+                </h3>
+            </div>
+        </div>
+
+        <hr>
+        
+        <ul class="list-unstyled">
+            {{ macro.displayCommentList(comments) }}
+        </ul>
+
+
+
+    </div>
+
+{% endblock %}
